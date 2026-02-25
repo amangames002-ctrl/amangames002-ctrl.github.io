@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-02-25T08:00:00+08:00",
+  "agents": {
+    "green1":  { "action": "idle", "detail": "睡覺中 💤" },
+    "linlao":  { "action": "idle", "detail": "睡覺中 💤" },
+    "ake":     { "action": "idle", "detail": "睡覺中 💤" },
+    "xiaolv":  { "action": "idle", "detail": "睡覺中 💤" },
+    "laowang": { "action": "idle", "detail": "睡覺中 💤" },
+    "laocha":  { "action": "idle", "detail": "睡覺中 💤" }
+  }
+}

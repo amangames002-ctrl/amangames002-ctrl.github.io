@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🌱 PixelClaw Office</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Courier New', monospace; }
+canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+#status-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.8); color: #0f0; font-size: 12px;
+  padding: 4px 12px; display: flex; gap: 16px; z-index: 10;
+  border-bottom: 1px solid #1a3a1a;
+}
+#status-bar .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+#status-bar .dot.on { background: #0f0; box-shadow: 0 0 4px #0f0; }
+#status-bar .dot.off { background: #333; }
+#sim-btn {
+  position: fixed; top: 4px; right: 12px; z-index: 11;
+  background: #1a3a1a; color: #0f0; border: 1px solid #0f0; padding: 2px 8px;
+  font-family: 'Courier New', monospace; font-size: 11px; cursor: pointer;
+}
+#sim-btn:hover { background: #0f0; color: #000; }
+</style>
+</head>
+<body>
+<div id="status-bar">
+  <span><span class="dot on" id="conn-dot"></span><span id="conn-text">connected</span></span>
+  <span>agents: <span id="agent-count">6</span></span>
+</div>
+<button id="sim-btn" onclick="toggleSim()">sim: off</button>
+<canvas id="office"></canvas>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// PixelClaw Office - Standalone MVP
+// Inspired by pixel-agents (MIT License, Pablo De Lucca)
+// ═══════════════════════════════════════════════════════════════
+
+const TILE = 16;
+const SCALE = 3;
+const COLS = 16;
+const ROWS = 14;
+const W = COLS * TILE * SCALE;
+const H = ROWS * TILE * SCALE;
+
+const canvas = document.getElementById('office');
+const ctx = canvas.getContext('2d');
+canvas.width = W;
+canvas.height = H;
+
+// ── Agents ──
+const AGENTS = [
+  { id: 'green1',  name: '小綠1號', emoji: '🌱', color: '#44CC66', shirt: '#44AA66', skin: '#FFCC99', hair: '#228B22', pants: '#2d5a2d', seatCol: 3,  seatRow: 3 },
+  { id: 'linlao',  name: '老林',   emoji: '🔧', color: '#4488CC', shirt: '#4488CC', skin: '#DEB887', hair: '#333333', pants: '#334466', seatCol: 9,  seatRow: 3 },
+  { id: 'ake',     name: '阿克',   emoji: '🧠', color: '#AA55CC', shirt: '#AA55CC', skin: '#FFCC99', hair: '#AA4422', pants: '#443355', seatCol: 3,  seatRow: 6 },
+  { id: 'xiaolv',  name: '小旅',   emoji: '✈️', color: '#CCAA33', shirt: '#CCAA33', skin: '#DEB887', hair: '#553322', pants: '#444433', seatCol: 9,  seatRow: 6 },
+  { id: 'laowang', name: '老網',   emoji: '🌐', color: '#CC4444', shirt: '#CC4444', skin: '#FFCC99', hair: '#FFD700', pants: '#333333', seatCol: 3,  seatRow: 9 },
+  { id: 'laocha',  name: '老查',   emoji: '📊', color: '#FF8844', shirt: '#FF8844', skin: '#FFCC99', hair: '#111111', pants: '#443322', seatCol: 9,  seatRow: 9 },
+];
+
+// ── Agent State ──
+const agentState = {};
+AGENTS.forEach(a => {
+  agentState[a.id] = {
+    action: 'idle',      // idle, waiting, typing, reading, running
+    detail: '睡覺中 💤',
+    frame: 0,
+    frameTimer: 0,
+    x: a.seatCol * TILE * SCALE,
+    y: a.seatRow * TILE * SCALE,
+  };
+});
+
+// ── Random Status Phrases ──
+const IDLE_PHRASES = [
+  '喝茶中 ☕', '任務完成 ✅', '打盹中 😴', '看風景 🌄', '摸魚中 🐟',
+  '滑手機 📱', '喝咖啡 ☕', '發呆中 💭', '伸懶腰 🙆', '吃零食 🍿',
+  '聽音樂 🎵', '看漫畫 📖', '睡覺中 💤', '划水中 🏄', '冥想中 🧘',
+];
+const WAITING_PHRASES = [
+  '思考中...', '沉思中...', '嗯...', '醞釀想法中...', '翻閱竹簡中...',
+  '搖羽扇中...', '草船借箭中...', '空城計部署中...', '觀星占卜中...',
+  '召喚智慧中...', '載入腦力中...', '撫鬚沉思...', '運籌帷幄中...',
+  '仰望星空中...', '推算卦象中...', '通靈孔明中...',
+  '借東風中...', '查閱古籍中...', '神經元暖機中...',
+  '倉鼠跑輪啟動中...', '咖啡因注入中...', '下載智慧.tar.gz...',
+  '編譯思緒中...', '腦袋重組中...', '請教橡皮鴨中...',
+  '擲出自然20...', '翻 Stack Overflow 中...', 'sudo 用力想...',
+  '進入矩陣中...', '校準脈輪中...', '磨墨中...',
+];
+
+// ── Pixel Character Drawing ──
+function drawCharacter(x, y, agent, state, time) {
+  const s = SCALE;
+  const a = AGENTS.find(a => a.id === agent);
+  if (!a) return;
+
+  const bobY = state.action === 'idle' ? Math.sin(time * 2 + AGENTS.indexOf(a)) * s : 0;
+  const baseY = y + bobY;
+
+  // Shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.3)';
+  ctx.fillRect(x + 2*s, baseY + 15*s, 12*s, 3*s);
+
+  // Hair
+  ctx.fillStyle = a.hair;
+  ctx.fillRect(x + 4*s, baseY + 0*s, 8*s, 4*s);
+
+  // Face
+  ctx.fillStyle = a.skin;
+  ctx.fillRect(x + 4*s, baseY + 3*s, 8*s, 4*s);
+
+  // Eyes
+  const blinkFrame = Math.floor(time * 3) % 60;
+  if (blinkFrame !== 0) {
+    ctx.fillStyle = '#FFF';
+    ctx.fillRect(x + 5*s, baseY + 4*s, 2*s, 2*s);
+    ctx.fillRect(x + 9*s, baseY + 4*s, 2*s, 2*s);
+    ctx.fillStyle = '#222';
+    ctx.fillRect(x + 6*s, baseY + 4*s, 1*s, 1*s);
+    ctx.fillRect(x + 10*s, baseY + 4*s, 1*s, 1*s);
+  } else {
+    ctx.fillStyle = a.skin;
+    ctx.fillRect(x + 5*s, baseY + 4*s, 2*s, 1*s);
+    ctx.fillRect(x + 9*s, baseY + 4*s, 2*s, 1*s);
+  }
+
+  // Shirt / body
+  ctx.fillStyle = a.shirt;
+  ctx.fillRect(x + 3*s, baseY + 7*s, 10*s, 5*s);
+
+  // Arms animation
+  if (state.action === 'typing' || state.action === 'running') {
+    const armFrame = Math.floor(time * 6) % 2;
+    ctx.fillStyle = a.skin;
+    ctx.fillRect(x + 2*s, baseY + (8 + armFrame)*s, 2*s, 2*s);
+    ctx.fillRect(x + 12*s, baseY + (9 - armFrame)*s, 2*s, 2*s);
+  } else if (state.action === 'reading') {
+    ctx.fillStyle = a.skin;
+    ctx.fillRect(x + 3*s, baseY + 8*s, 2*s, 3*s);
+    ctx.fillRect(x + 11*s, baseY + 8*s, 2*s, 3*s);
+    // Book
+    ctx.fillStyle = '#DDD';
+    ctx.fillRect(x + 5*s, baseY + 9*s, 6*s, 4*s);
+    ctx.fillStyle = '#666';
+    ctx.fillRect(x + 8*s, baseY + 9*s, 1*s, 4*s);
+  } else {
+    ctx.fillStyle = a.skin;
+    ctx.fillRect(x + 2*s, baseY + 8*s, 2*s, 2*s);
+    ctx.fillRect(x + 12*s, baseY + 8*s, 2*s, 2*s);
+  }
+
+  // Pants
+  ctx.fillStyle = a.pants;
+  ctx.fillRect(x + 4*s, baseY + 12*s, 8*s, 3*s);
+
+  // Legs/feet
+  const walkFrame = (state.action === 'idle') ? 0 : Math.floor(time * 4) % 2;
+  ctx.fillStyle = '#222';
+  ctx.fillRect(x + 4*s, baseY + 15*s, 3*s, 2*s);
+  ctx.fillRect(x + 9*s, baseY + 15*s, 3*s, 2*s);
+}
+
+// ── Speech Bubble ──
+function drawBubble(x, y, text, color) {
+  const s = SCALE;
+  ctx.font = `${10*s/3}px "Courier New", monospace`;
+  const metrics = ctx.measureText(text);
+  const tw = metrics.width;
+  const bw = tw + 8*s/3;
+  const bh = 14*s/3;
+  const bx = x + 8*s - bw/2;
+  const by = y - 8*s/3;
+
+  // Bubble bg
+  ctx.fillStyle = 'rgba(0,0,0,0.85)';
+  ctx.strokeStyle = color || '#0f0';
+  ctx.lineWidth = 1;
+  roundRect(ctx, bx, by, bw, bh, 3*s/3);
+  ctx.fill();
+  ctx.stroke();
+
+  // Tail
+  ctx.fillStyle = 'rgba(0,0,0,0.85)';
+  ctx.beginPath();
+  ctx.moveTo(x + 7*s, by + bh);
+  ctx.lineTo(x + 8*s, by + bh + 3*s/3);
+  ctx.lineTo(x + 9*s, by + bh);
+  ctx.fill();
+
+  // Text
+  ctx.fillStyle = color || '#0f0';
+  ctx.fillText(text, bx + 4*s/3, by + bh - 4*s/3);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ── Name Label ──
+function drawNameLabel(x, y, name, color) {
+  const s = SCALE;
+  ctx.font = `bold ${9*s/3}px "Courier New", monospace`;
+  const tw = ctx.measureText(name).width;
+  const bx = x + 8*s - tw/2 - 3;
+  const by = y + 17*s;
+
+  ctx.fillStyle = 'rgba(0,0,0,0.8)';
+  ctx.fillRect(bx, by, tw + 6, 12*s/3);
+  ctx.fillStyle = color;
+  ctx.fillText(name, bx + 3, by + 9*s/3);
+}
+
+// ── Office Background ──
+function drawOffice() {
+  const s = SCALE;
+  // Floor
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const shade = ((r + c) % 2 === 0) ? '#2a1f0a' : '#3a2f1a';
+      ctx.fillStyle = shade;
+      ctx.fillRect(c * TILE * s, r * TILE * s, TILE * s, TILE * s);
+    }
+  }
+
+  // Walls (top 2 rows)
+  for (let c = 0; c < COLS; c++) {
+    ctx.fillStyle = '#5a3a1a';
+    ctx.fillRect(c * TILE * s, 0, TILE * s, TILE * s * 2);
+    // Wall detail
+    ctx.fillStyle = '#4a2a0a';
+    ctx.fillRect(c * TILE * s, TILE * s * 2 - 2*s, TILE * s, 2*s);
+  }
+
+  // Wall decorations
+  ctx.fillStyle = '#6a4a2a';
+  for (let c = 0; c < COLS; c += 4) {
+    ctx.fillRect(c * TILE * s + 6*s, 4*s, 4*s, TILE * s + 8*s);
+  }
+
+  // Desks (one per agent pair)
+  const deskPositions = [
+    { col: 5, row: 3 }, { col: 5, row: 6 }, { col: 5, row: 9 },
+  ];
+  deskPositions.forEach(({col, row}) => {
+    // Desk surface
+    ctx.fillStyle = '#8B6914';
+    ctx.fillRect(col * TILE * s, row * TILE * s - 2*s, TILE * s * 4, TILE * s + 10*s);
+    ctx.fillStyle = '#A07828';
+    ctx.fillRect(col * TILE * s + 2*s, row * TILE * s, TILE * s * 4 - 4*s, TILE * s + 6*s);
+    // Monitor left
+    ctx.fillStyle = '#222';
+    ctx.fillRect((col+0.5) * TILE * s, (row-0.5) * TILE * s, 8*s, 6*s);
+    ctx.fillStyle = '#1a5a8a';
+    ctx.fillRect((col+0.5) * TILE * s + s, (row-0.5) * TILE * s + s, 6*s, 4*s);
+    // Monitor right
+    ctx.fillStyle = '#222';
+    ctx.fillRect((col+2.5) * TILE * s, (row-0.5) * TILE * s, 8*s, 6*s);
+    ctx.fillStyle = '#1a5a8a';
+    ctx.fillRect((col+2.5) * TILE * s + s, (row-0.5) * TILE * s + s, 6*s, 4*s);
+  });
+
+  // Plants
+  const plantPositions = [{col:0, row:2}, {col:15, row:2}, {col:0, row:11}, {col:15, row:11}];
+  plantPositions.forEach(({col, row}) => {
+    ctx.fillStyle = '#5a3a1a';
+    ctx.fillRect(col * TILE * s + 4*s, row * TILE * s + 8*s, 8*s, 8*s);
+    ctx.fillStyle = '#228B22';
+    ctx.fillRect(col * TILE * s + 2*s, row * TILE * s, 12*s, 10*s);
+    ctx.fillStyle = '#2d9a2d';
+    ctx.fillRect(col * TILE * s + 4*s, row * TILE * s - 2*s, 8*s, 6*s);
+  });
+
+  // Bookshelf at top
+  ctx.fillStyle = '#6a4a2a';
+  ctx.fillRect(11 * TILE * s, 0, TILE * s * 4, TILE * s * 2);
+  for (let i = 0; i < 6; i++) {
+    ctx.fillStyle = ['#c44','#44c','#cc4','#4c4','#c4c','#4cc'][i];
+    ctx.fillRect(11 * TILE * s + 4*s + i * 6*s, 4*s, 5*s, 12*s);
+  }
+
+  // Vending machine bottom-left
+  ctx.fillStyle = '#336';
+  ctx.fillRect(1 * TILE * s, 12 * TILE * s, TILE * s * 2, TILE * s * 2 - 4*s);
+  ctx.fillStyle = '#4488CC';
+  ctx.fillRect(1 * TILE * s + 2*s, 12 * TILE * s + 2*s, TILE * s * 2 - 4*s, TILE * s - 2*s);
+  ctx.fillStyle = '#FFF';
+  ctx.font = `${6*s/3}px monospace`;
+  ctx.fillText('DRINK', 1 * TILE * s + 4*s, 12 * TILE * s + TILE * s + 6*s);
+}
+
+// ── Main Loop ──
+let lastTime = 0;
+let simMode = false;
+
+function toggleSim() {
+  simMode = !simMode;
+  document.getElementById('sim-btn').textContent = `sim: ${simMode ? 'on' : 'off'}`;
+  if (simMode) startSimulation();
+}
+
+function startSimulation() {
+  // Simulate activity for demo
+  const actions = ['waiting', 'typing', 'reading', 'running', 'idle'];
+  AGENTS.forEach((a, i) => {
+    setTimeout(() => {
+      if (!simMode) return;
+      const action = actions[i % actions.length];
+      const detail = action === 'waiting' ? WAITING_PHRASES[Math.floor(Math.random() * WAITING_PHRASES.length)]
+        : action === 'idle' ? IDLE_PHRASES[Math.floor(Math.random() * IDLE_PHRASES.length)]
+        : action === 'typing' ? 'fs_write SKILL.md'
+        : action === 'reading' ? 'fs_read config.json'
+        : 'exec_bash npm test';
+      updateAgent(a.id, action, detail);
+    }, i * 800);
+  });
+  // Cycle through states
+  setInterval(() => {
+    if (!simMode) return;
+    const a = AGENTS[Math.floor(Math.random() * AGENTS.length)];
+    const action = actions[Math.floor(Math.random() * actions.length)];
+    const detail = action === 'waiting' ? WAITING_PHRASES[Math.floor(Math.random() * WAITING_PHRASES.length)]
+      : action === 'idle' ? IDLE_PHRASES[Math.floor(Math.random() * IDLE_PHRASES.length)]
+      : action === 'typing' ? ['fs_write SKILL.md', 'Composing response...', 'Writing memory...'][Math.floor(Math.random()*3)]
+      : action === 'reading' ? ['fs_read config.json', 'web_search AI news', 'memory_search 每日'][Math.floor(Math.random()*3)]
+      : ['exec_bash npm test', 'exec_bash git push', 'web_fetch https://...'][Math.floor(Math.random()*3)];
+    updateAgent(a.id, action, detail);
+  }, 3000);
+}
+
+function updateAgent(id, action, detail) {
+  if (agentState[id]) {
+    agentState[id].action = action;
+    agentState[id].detail = detail;
+  }
+}
+
+function render(time) {
+  const t = time / 1000;
+  ctx.clearRect(0, 0, W, H);
+
+  drawOffice();
+
+  // Draw agents
+  AGENTS.forEach(a => {
+    const state = agentState[a.id];
+    const x = a.seatCol * TILE * SCALE;
+    const y = a.seatRow * TILE * SCALE;
+
+    drawCharacter(x, y, a.id, state, t);
+    drawNameLabel(x, y, a.name, a.color);
+    if (state.detail) {
+      drawBubble(x, y, state.detail, a.color);
+    }
+  });
+
+  // Active agent count
+  const activeCount = AGENTS.filter(a => agentState[a.id].action !== 'idle').length;
+  document.getElementById('agent-count').textContent = `${AGENTS.length} (${activeCount} active)`;
+
+  requestAnimationFrame(render);
+}
+
+// ── Status Polling ──
+const STATUS_URL = 'status.json';
+let pollInterval = null;
+
+async function pollStatus() {
+  try {
+    const res = await fetch(STATUS_URL + '?t=' + Date.now());
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.agents) {
+      for (const [id, info] of Object.entries(data.agents)) {
+        if (agentState[id]) {
+          agentState[id].action = info.action || 'idle';
+          agentState[id].detail = info.detail || '';
+        }
+      }
+    }
+    document.getElementById('conn-dot').className = 'dot on';
+    document.getElementById('conn-text').textContent = 'connected';
+  } catch {
+    document.getElementById('conn-dot').className = 'dot off';
+    document.getElementById('conn-text').textContent = 'offline (demo)';
+  }
+}
+
+// Start polling every 2s
+pollInterval = setInterval(pollStatus, 2000);
+pollStatus();
+
+// ── Boot ──
+requestAnimationFrame(render);
+</script>
+</body>
+</html>
