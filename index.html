@@ -1,27 +1,123 @@
 <!DOCTYPE html>
-<html lang='zh-TW'>
+<html lang="zh-TW">
 <head>
-<meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>X Daily Digest</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e7e9ea;max-width:650px;margin:0 auto;padding:16px}
-h1{font-size:1.6em;margin-bottom:8px;color:#1d9bf0}
-.subtitle{color:#71767b;margin-bottom:24px}
-.day{display:block;padding:14px;border:1px solid #2f3336;border-radius:12px;margin-bottom:10px;background:#16181c;color:#e7e9ea;text-decoration:none;font-size:1.05em}
-.day:hover{border-color:#1d9bf0;background:#1a2233}
-.new{border-color:#00ba7c}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Daily Digest</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            color: #e7e9ea;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            padding: 40px 0;
+            border-bottom: 1px solid #2f3336;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #71767b;
+            font-size: 16px;
+        }
+        .date-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .date-item {
+            display: block;
+            background: #16181c;
+            padding: 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #e7e9ea;
+            transition: all 0.2s;
+        }
+        .date-item:hover {
+            background: #1d9bf0;
+            transform: translateY(-2px);
+        }
+        .date-item .date {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .date-item .count {
+            color: #71767b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .date-item:hover .count {
+            color: #fff;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #71767b;
+            font-size: 14px;
+            border-top: 1px solid #2f3336;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-<h1>📰 X Daily Digest</h1>
-<p class='subtitle'>Daily curated tweets from X</p>
-<a class='day new' href='2026-03-04.html'>📅 2026-03-04 (76 tweets)</a>
-<a class='day' href='2026-03-03.html'>📅 2026-03-03 (80 tweets)</a>
-<a class='day' href='2026-02-28.html'>📅 2026-02-28 (82 tweets)</a>
-<a class='day' href='2026-02-27.html'>📅 2026-02-27 (72 tweets)</a>
-<a class='day' href='2026-02-26.html'>📅 2026-02-26 (78 tweets)</a>
-<a class='day' href='2026-02-25.html'>📅 2026-02-25 (64 tweets)</a>
-<a class='day' href='2026-02-24.html'>📅 2026-02-24 (83 tweets)</a>
-</body></html>
+    <div class="header">
+        <h1>🐦 X Daily Digest</h1>
+        <p>每日精選推文</p>
+    </div>
+    
+    <div class="date-list">
+
+        <a href="2026-03-04.html" class="date-item">
+            <div class="date">📅 2026年03月04日</div>
+            <div class="count">76 則推文</div>
+        </a>
+
+        <a href="2026-03-03.html" class="date-item">
+            <div class="date">📅 2026年03月03日</div>
+            <div class="count">80 則推文</div>
+        </a>
+
+        <a href="2026-02-28.html" class="date-item">
+            <div class="date">📅 2026年02月28日</div>
+            <div class="count">82 則推文</div>
+        </a>
+
+        <a href="2026-02-27.html" class="date-item">
+            <div class="date">📅 2026年02月27日</div>
+            <div class="count">67 則推文</div>
+        </a>
+
+        <a href="2026-02-26.html" class="date-item">
+            <div class="date">📅 2026年02月26日</div>
+            <div class="count">78 則推文</div>
+        </a>
+
+        <a href="2026-02-25.html" class="date-item">
+            <div class="date">📅 2026年02月25日</div>
+            <div class="count">0 則推文</div>
+        </a>
+
+        <a href="2026-02-24.html" class="date-item">
+            <div class="date">📅 2026年02月24日</div>
+            <div class="count">0 則推文</div>
+        </a>
+
+    </div>
+    
+    <div class="footer">
+        <p>每日 08:00 自動更新</p>
+    </div>
+</body>
+</html>
