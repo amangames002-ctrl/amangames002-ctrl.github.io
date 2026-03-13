@@ -1,0 +1,17 @@
+{
+  "updated": "2026-03-11T16:01:03Z",
+  "workspace": {
+    "totalSize": "4.7G",
+    "totalMdFiles": 3302
+  },
+  "coreContext": [
+    {"name": "MEMORY.md", "path": "/workspace/MEMORY.md", "size": 15080, "tokens": 3770},
+    {"name": "AGENTS.md", "path": "/workspace/AGENTS.md", "size": 6500, "tokens": 1625},
+    {"name": "SOUL.md", "path": "/workspace/SOUL.md", "size": 2080, "tokens": 520}
+  ],
+  "folders": [
+    {"name": "skills", "path": "/workspace/skills", "size": "150KB", "files": 28},
+    {"name": "scripts", "path": "/workspace/scripts", "size": "80KB", "files": 15},
+    {"name": "memory", "path": "/workspace/memory", "size": "50KB", "files": 15}
+  ]
+}

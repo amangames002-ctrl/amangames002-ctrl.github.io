@@ -1,0 +1,981 @@
+{
+  "updated": "2026-03-11T13:36:10Z",
+  "sessionStart": {
+    "description": "每次新 Session 啟動載入",
+    "estimatedTokens": 7027,
+    "breakdown": {
+      "coreFiles": 7027,
+      "additional": 0
+    }
+  },
+  "cronJobs": [
+    {
+      "name": "daily-memory-extract",
+      "frequency": "Daily 23:00",
+      "estimatedTokens": 5000
+    },
+    {
+      "name": "memory-compactor",
+      "frequency": "Daily 23:30",
+      "estimatedTokens": 8000
+    },
+    {
+      "name": "keep-sessions-alive",
+      "frequency": "Every 3 days 03:00",
+      "estimatedTokens": 3000
+    },
+    {
+      "name": "daily-news-chats",
+      "frequency": "Daily 08:00",
+      "estimatedTokens": 4500
+    },
+    {
+      "name": "token-dashboard-update",
+      "frequency": "Daily 00:01",
+      "estimatedTokens": 2000
+    }
+  ],
+  "dailyUsage": [
+    {
+      "date": "2026-03-11",
+      "model": "minimax/M2.5",
+      "input": 155000,
+      "output": 58000
+    },
+    {
+      "date": "2026-03-11",
+      "model": "nvidia/glm5",
+      "input": 182000,
+      "output": 68000
+    },
+    {
+      "date": "2026-03-11",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 105000,
+      "output": 42000
+    },
+    {
+      "date": "2026-03-11",
+      "model": "nvidia/glm4.7",
+      "input": 78000,
+      "output": 31000
+    },
+    {
+      "date": "2026-03-10",
+      "model": "minimax/M2.5",
+      "input": 145000,
+      "output": 52000
+    },
+    {
+      "date": "2026-03-10",
+      "model": "nvidia/glm5",
+      "input": 168000,
+      "output": 62000
+    },
+    {
+      "date": "2026-03-10",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 95000,
+      "output": 38000
+    },
+    {
+      "date": "2026-03-10",
+      "model": "nvidia/glm4.7",
+      "input": 72000,
+      "output": 28000
+    },
+    {
+      "date": "2026-03-09",
+      "model": "minimax/M2.5",
+      "input": 132000,
+      "output": 48000
+    },
+    {
+      "date": "2026-03-09",
+      "model": "nvidia/glm5",
+      "input": 155000,
+      "output": 58000
+    },
+    {
+      "date": "2026-03-09",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 88000,
+      "output": 35000
+    },
+    {
+      "date": "2026-03-09",
+      "model": "nvidia/glm4.7",
+      "input": 65000,
+      "output": 25000
+    },
+    {
+      "date": "2026-03-08",
+      "model": "minimax/M2.5",
+      "input": 128000,
+      "output": 46000
+    },
+    {
+      "date": "2026-03-08",
+      "model": "nvidia/glm5",
+      "input": 148000,
+      "output": 55000
+    },
+    {
+      "date": "2026-03-08",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 82000,
+      "output": 32000
+    },
+    {
+      "date": "2026-03-08",
+      "model": "nvidia/glm4.7",
+      "input": 60000,
+      "output": 23000
+    },
+    {
+      "date": "2026-03-07",
+      "model": "minimax/M2.5",
+      "input": 118000,
+      "output": 44000
+    },
+    {
+      "date": "2026-03-07",
+      "model": "nvidia/glm5",
+      "input": 138000,
+      "output": 51000
+    },
+    {
+      "date": "2026-03-07",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 76000,
+      "output": 29000
+    },
+    {
+      "date": "2026-03-07",
+      "model": "nvidia/glm4.7",
+      "input": 55000,
+      "output": 21000
+    },
+    {
+      "date": "2026-03-06",
+      "model": "minimax/M2.5",
+      "input": 135000,
+      "output": 50000
+    },
+    {
+      "date": "2026-03-06",
+      "model": "nvidia/glm5",
+      "input": 162000,
+      "output": 60000
+    },
+    {
+      "date": "2026-03-06",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 90000,
+      "output": 36000
+    },
+    {
+      "date": "2026-03-06",
+      "model": "nvidia/glm4.7",
+      "input": 68000,
+      "output": 26000
+    },
+    {
+      "date": "2026-03-05",
+      "model": "minimax/M2.5",
+      "input": 142000,
+      "output": 53000
+    },
+    {
+      "date": "2026-03-05",
+      "model": "nvidia/glm5",
+      "input": 172000,
+      "output": 64000
+    },
+    {
+      "date": "2026-03-05",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 98000,
+      "output": 39000
+    },
+    {
+      "date": "2026-03-05",
+      "model": "nvidia/glm4.7",
+      "input": 75000,
+      "output": 29000
+    },
+    {
+      "date": "2026-03-04",
+      "model": "minimax/M2.5",
+      "input": 130000,
+      "output": 48000
+    },
+    {
+      "date": "2026-03-04",
+      "model": "nvidia/glm5",
+      "input": 158000,
+      "output": 59000
+    },
+    {
+      "date": "2026-03-04",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 86000,
+      "output": 34000
+    },
+    {
+      "date": "2026-03-04",
+      "model": "nvidia/glm4.7",
+      "input": 64000,
+      "output": 25000
+    },
+    {
+      "date": "2026-03-03",
+      "model": "minimax/M2.5",
+      "input": 125000,
+      "output": 45000
+    },
+    {
+      "date": "2026-03-03",
+      "model": "nvidia/glm4.7",
+      "input": 85000,
+      "output": 32000
+    },
+    {
+      "date": "2026-03-03",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 150000,
+      "output": 55000
+    },
+    {
+      "date": "2026-03-02",
+      "model": "minimax/M2.5",
+      "input": 98000,
+      "output": 38000
+    },
+    {
+      "date": "2026-03-02",
+      "model": "nvidia/glm4.7",
+      "input": 72000,
+      "output": 28000
+    },
+    {
+      "date": "2026-03-02",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 110000,
+      "output": 42000
+    },
+    {
+      "date": "2026-03-01",
+      "model": "minimax/M2.5",
+      "input": 105000,
+      "output": 41000
+    },
+    {
+      "date": "2026-03-01",
+      "model": "nvidia/glm4.7",
+      "input": 68000,
+      "output": 25000
+    },
+    {
+      "date": "2026-03-01",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 130000,
+      "output": 48000
+    },
+    {
+      "date": "2026-02-28",
+      "model": "minimax/M2.5",
+      "input": 88000,
+      "output": 35000
+    },
+    {
+      "date": "2026-02-28",
+      "model": "nvidia/glm4.7",
+      "input": 55000,
+      "output": 22000
+    },
+    {
+      "date": "2026-02-28",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 95000,
+      "output": 36000
+    },
+    {
+      "date": "2026-02-27",
+      "model": "minimax/M2.5",
+      "input": 75000,
+      "output": 30000
+    },
+    {
+      "date": "2026-02-27",
+      "model": "nvidia/glm4.7",
+      "input": 48000,
+      "output": 19000
+    },
+    {
+      "date": "2026-02-27",
+      "model": "anyrouter/claude-opus-4-6",
+      "input": 82000,
+      "output": 31000
+    }
+  ],
+  "modelStats": [
+    {
+      "model": "anyrouter/claude-opus-4-6",
+      "totalInput": 1287000,
+      "totalOutput": 497000,
+      "avgCost": 0
+    },
+    {
+      "model": "minimax/M2.5",
+      "totalInput": 1576000,
+      "totalOutput": 588000,
+      "avgCost": 0
+    },
+    {
+      "model": "nvidia/glm4.7",
+      "totalInput": 865000,
+      "totalOutput": 334000,
+      "avgCost": 0
+    },
+    {
+      "model": "nvidia/glm5",
+      "totalInput": 1283000,
+      "totalOutput": 477000,
+      "avgCost": 0
+    }
+  ],
+  "dailyStats": [
+    {
+      "date": "2026-03-11",
+      "input": 520000,
+      "output": 199000,
+      "total": 719000
+    },
+    {
+      "date": "2026-03-10",
+      "input": 480000,
+      "output": 180000,
+      "total": 660000
+    },
+    {
+      "date": "2026-03-09",
+      "input": 440000,
+      "output": 166000,
+      "total": 606000
+    },
+    {
+      "date": "2026-03-08",
+      "input": 418000,
+      "output": 156000,
+      "total": 574000
+    },
+    {
+      "date": "2026-03-07",
+      "input": 387000,
+      "output": 145000,
+      "total": 532000
+    },
+    {
+      "date": "2026-03-06",
+      "input": 455000,
+      "output": 172000,
+      "total": 627000
+    },
+    {
+      "date": "2026-03-05",
+      "input": 487000,
+      "output": 185000,
+      "total": 672000
+    },
+    {
+      "date": "2026-03-04",
+      "input": 438000,
+      "output": 166000,
+      "total": 604000
+    },
+    {
+      "date": "2026-03-03",
+      "input": 360000,
+      "output": 132000,
+      "total": 492000
+    },
+    {
+      "date": "2026-03-02",
+      "input": 280000,
+      "output": 108000,
+      "total": 388000
+    },
+    {
+      "date": "2026-03-01",
+      "input": 303000,
+      "output": 114000,
+      "total": 417000
+    },
+    {
+      "date": "2026-02-28",
+      "input": 238000,
+      "output": 93000,
+      "total": 331000
+    },
+    {
+      "date": "2026-02-27",
+      "input": 205000,
+      "output": 80000,
+      "total": 285000
+    }
+  ],
+  "weeklyStats": [
+    {
+      "week": "2026-03-09",
+      "weekStart": "2026-03-09",
+      "input": 1440000,
+      "output": 545000,
+      "total": 1985000
+    },
+    {
+      "week": "2026-03-02",
+      "weekStart": "2026-03-02",
+      "input": 2825000,
+      "output": 1064000,
+      "total": 3889000
+    },
+    {
+      "week": "2026-02-23",
+      "weekStart": "2026-02-23",
+      "input": 746000,
+      "output": 287000,
+      "total": 1033000
+    }
+  ],
+  "monthlyStats": [
+    {
+      "month": "2026-03",
+      "input": 4568000,
+      "output": 1723000,
+      "total": 6291000
+    },
+    {
+      "month": "2026-02",
+      "input": 443000,
+      "output": 173000,
+      "total": 616000
+    }
+  ],
+  "modelDailyStats": {
+    "minimax/M2.5": [
+      {
+        "date": "2026-03-11",
+        "input": 155000,
+        "output": 58000,
+        "total": 213000
+      },
+      {
+        "date": "2026-03-10",
+        "input": 145000,
+        "output": 52000,
+        "total": 197000
+      },
+      {
+        "date": "2026-03-09",
+        "input": 132000,
+        "output": 48000,
+        "total": 180000
+      },
+      {
+        "date": "2026-03-08",
+        "input": 128000,
+        "output": 46000,
+        "total": 174000
+      },
+      {
+        "date": "2026-03-07",
+        "input": 118000,
+        "output": 44000,
+        "total": 162000
+      },
+      {
+        "date": "2026-03-06",
+        "input": 135000,
+        "output": 50000,
+        "total": 185000
+      },
+      {
+        "date": "2026-03-05",
+        "input": 142000,
+        "output": 53000,
+        "total": 195000
+      },
+      {
+        "date": "2026-03-04",
+        "input": 130000,
+        "output": 48000,
+        "total": 178000
+      },
+      {
+        "date": "2026-03-03",
+        "input": 125000,
+        "output": 45000,
+        "total": 170000
+      },
+      {
+        "date": "2026-03-02",
+        "input": 98000,
+        "output": 38000,
+        "total": 136000
+      },
+      {
+        "date": "2026-03-01",
+        "input": 105000,
+        "output": 41000,
+        "total": 146000
+      },
+      {
+        "date": "2026-02-28",
+        "input": 88000,
+        "output": 35000,
+        "total": 123000
+      },
+      {
+        "date": "2026-02-27",
+        "input": 75000,
+        "output": 30000,
+        "total": 105000
+      }
+    ],
+    "nvidia/glm5": [
+      {
+        "date": "2026-03-11",
+        "input": 182000,
+        "output": 68000,
+        "total": 250000
+      },
+      {
+        "date": "2026-03-10",
+        "input": 168000,
+        "output": 62000,
+        "total": 230000
+      },
+      {
+        "date": "2026-03-09",
+        "input": 155000,
+        "output": 58000,
+        "total": 213000
+      },
+      {
+        "date": "2026-03-08",
+        "input": 148000,
+        "output": 55000,
+        "total": 203000
+      },
+      {
+        "date": "2026-03-07",
+        "input": 138000,
+        "output": 51000,
+        "total": 189000
+      },
+      {
+        "date": "2026-03-06",
+        "input": 162000,
+        "output": 60000,
+        "total": 222000
+      },
+      {
+        "date": "2026-03-05",
+        "input": 172000,
+        "output": 64000,
+        "total": 236000
+      },
+      {
+        "date": "2026-03-04",
+        "input": 158000,
+        "output": 59000,
+        "total": 217000
+      }
+    ],
+    "anyrouter/claude-opus-4-6": [
+      {
+        "date": "2026-03-11",
+        "input": 105000,
+        "output": 42000,
+        "total": 147000
+      },
+      {
+        "date": "2026-03-10",
+        "input": 95000,
+        "output": 38000,
+        "total": 133000
+      },
+      {
+        "date": "2026-03-09",
+        "input": 88000,
+        "output": 35000,
+        "total": 123000
+      },
+      {
+        "date": "2026-03-08",
+        "input": 82000,
+        "output": 32000,
+        "total": 114000
+      },
+      {
+        "date": "2026-03-07",
+        "input": 76000,
+        "output": 29000,
+        "total": 105000
+      },
+      {
+        "date": "2026-03-06",
+        "input": 90000,
+        "output": 36000,
+        "total": 126000
+      },
+      {
+        "date": "2026-03-05",
+        "input": 98000,
+        "output": 39000,
+        "total": 137000
+      },
+      {
+        "date": "2026-03-04",
+        "input": 86000,
+        "output": 34000,
+        "total": 120000
+      },
+      {
+        "date": "2026-03-03",
+        "input": 150000,
+        "output": 55000,
+        "total": 205000
+      },
+      {
+        "date": "2026-03-02",
+        "input": 110000,
+        "output": 42000,
+        "total": 152000
+      },
+      {
+        "date": "2026-03-01",
+        "input": 130000,
+        "output": 48000,
+        "total": 178000
+      },
+      {
+        "date": "2026-02-28",
+        "input": 95000,
+        "output": 36000,
+        "total": 131000
+      },
+      {
+        "date": "2026-02-27",
+        "input": 82000,
+        "output": 31000,
+        "total": 113000
+      }
+    ],
+    "nvidia/glm4.7": [
+      {
+        "date": "2026-03-11",
+        "input": 78000,
+        "output": 31000,
+        "total": 109000
+      },
+      {
+        "date": "2026-03-10",
+        "input": 72000,
+        "output": 28000,
+        "total": 100000
+      },
+      {
+        "date": "2026-03-09",
+        "input": 65000,
+        "output": 25000,
+        "total": 90000
+      },
+      {
+        "date": "2026-03-08",
+        "input": 60000,
+        "output": 23000,
+        "total": 83000
+      },
+      {
+        "date": "2026-03-07",
+        "input": 55000,
+        "output": 21000,
+        "total": 76000
+      },
+      {
+        "date": "2026-03-06",
+        "input": 68000,
+        "output": 26000,
+        "total": 94000
+      },
+      {
+        "date": "2026-03-05",
+        "input": 75000,
+        "output": 29000,
+        "total": 104000
+      },
+      {
+        "date": "2026-03-04",
+        "input": 64000,
+        "output": 25000,
+        "total": 89000
+      },
+      {
+        "date": "2026-03-03",
+        "input": 85000,
+        "output": 32000,
+        "total": 117000
+      },
+      {
+        "date": "2026-03-02",
+        "input": 72000,
+        "output": 28000,
+        "total": 100000
+      },
+      {
+        "date": "2026-03-01",
+        "input": 68000,
+        "output": 25000,
+        "total": 93000
+      },
+      {
+        "date": "2026-02-28",
+        "input": 55000,
+        "output": 22000,
+        "total": 77000
+      },
+      {
+        "date": "2026-02-27",
+        "input": 48000,
+        "output": 19000,
+        "total": 67000
+      }
+    ]
+  },
+  "modelWeeklyStats": {
+    "minimax/M2.5": [
+      {
+        "week": "2026-03-09",
+        "input": 432000,
+        "output": 158000,
+        "total": 590000
+      },
+      {
+        "week": "2026-03-02",
+        "input": 876000,
+        "output": 324000,
+        "total": 1200000
+      },
+      {
+        "week": "2026-02-23",
+        "input": 268000,
+        "output": 106000,
+        "total": 374000
+      }
+    ],
+    "nvidia/glm5": [
+      {
+        "week": "2026-03-09",
+        "input": 505000,
+        "output": 188000,
+        "total": 693000
+      },
+      {
+        "week": "2026-03-02",
+        "input": 778000,
+        "output": 289000,
+        "total": 1067000
+      }
+    ],
+    "anyrouter/claude-opus-4-6": [
+      {
+        "week": "2026-03-09",
+        "input": 288000,
+        "output": 115000,
+        "total": 403000
+      },
+      {
+        "week": "2026-03-02",
+        "input": 692000,
+        "output": 267000,
+        "total": 959000
+      },
+      {
+        "week": "2026-02-23",
+        "input": 307000,
+        "output": 115000,
+        "total": 422000
+      }
+    ],
+    "nvidia/glm4.7": [
+      {
+        "week": "2026-03-09",
+        "input": 215000,
+        "output": 84000,
+        "total": 299000
+      },
+      {
+        "week": "2026-03-02",
+        "input": 479000,
+        "output": 184000,
+        "total": 663000
+      },
+      {
+        "week": "2026-02-23",
+        "input": 171000,
+        "output": 66000,
+        "total": 237000
+      }
+    ]
+  },
+  "modelMonthlyStats": {
+    "minimax/M2.5": [
+      {
+        "month": "2026-03",
+        "input": 1413000,
+        "output": 523000,
+        "total": 1936000
+      },
+      {
+        "month": "2026-02",
+        "input": 163000,
+        "output": 65000,
+        "total": 228000
+      }
+    ],
+    "nvidia/glm5": [
+      {
+        "month": "2026-03",
+        "input": 1283000,
+        "output": 477000,
+        "total": 1760000
+      }
+    ],
+    "anyrouter/claude-opus-4-6": [
+      {
+        "month": "2026-03",
+        "input": 1110000,
+        "output": 430000,
+        "total": 1540000
+      },
+      {
+        "month": "2026-02",
+        "input": 177000,
+        "output": 67000,
+        "total": 244000
+      }
+    ],
+    "nvidia/glm4.7": [
+      {
+        "month": "2026-03",
+        "input": 762000,
+        "output": 293000,
+        "total": 1055000
+      },
+      {
+        "month": "2026-02",
+        "input": 103000,
+        "output": 41000,
+        "total": 144000
+      }
+    ]
+  },
+  "avgDailyPerModel": {
+    "minimax/M2.5": {
+      "avgInput": 121231,
+      "avgOutput": 45231,
+      "avgTotal": 166462,
+      "days": 13
+    },
+    "nvidia/glm5": {
+      "avgInput": 160375,
+      "avgOutput": 59625,
+      "avgTotal": 220000,
+      "days": 8
+    },
+    "anyrouter/claude-opus-4-6": {
+      "avgInput": 99000,
+      "avgOutput": 38231,
+      "avgTotal": 137231,
+      "days": 13
+    },
+    "nvidia/glm4.7": {
+      "avgInput": 66538,
+      "avgOutput": 25692,
+      "avgTotal": 92231,
+      "days": 13
+    }
+  },
+  "peakUsage": {
+    "minimax/M2.5": {
+      "date": "2026-03-11",
+      "input": 155000,
+      "output": 58000,
+      "total": 213000
+    },
+    "nvidia/glm5": {
+      "date": "2026-03-11",
+      "input": 182000,
+      "output": 68000,
+      "total": 250000
+    },
+    "anyrouter/claude-opus-4-6": {
+      "date": "2026-03-03",
+      "input": 150000,
+      "output": 55000,
+      "total": 205000
+    },
+    "nvidia/glm4.7": {
+      "date": "2026-03-03",
+      "input": 85000,
+      "output": 32000,
+      "total": 117000
+    }
+  },
+  "growthRate": {
+    "minimax/M2.5": {
+      "recent7dAvg": 186571,
+      "prev7dAvg": 143000,
+      "growthPercent": 30.5
+    },
+    "nvidia/glm5": {
+      "recent7dAvg": 220429,
+      "prev7dAvg": 217000,
+      "growthPercent": 1.6
+    },
+    "anyrouter/claude-opus-4-6": {
+      "recent7dAvg": 126429,
+      "prev7dAvg": 149833,
+      "growthPercent": -15.6
+    },
+    "nvidia/glm4.7": {
+      "recent7dAvg": 93714,
+      "prev7dAvg": 90500,
+      "growthPercent": 3.6
+    }
+  },
+  "ioRatio": {
+    "anyrouter/claude-opus-4-6": {
+      "ratio": 2.59,
+      "inputPercent": 72.1,
+      "outputPercent": 27.9
+    },
+    "minimax/M2.5": {
+      "ratio": 2.68,
+      "inputPercent": 72.8,
+      "outputPercent": 27.2
+    },
+    "nvidia/glm4.7": {
+      "ratio": 2.59,
+      "inputPercent": 72.1,
+      "outputPercent": 27.9
+    },
+    "nvidia/glm5": {
+      "ratio": 2.69,
+      "inputPercent": 72.9,
+      "outputPercent": 27.1
+    }
+  }
+}

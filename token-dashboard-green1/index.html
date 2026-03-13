@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小綠1號 Token Dashboard</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>🌱 小綠1號 Token Dashboard</h1>
+      <p class="subtitle">只分析 main / 小綠1號 session 日誌，不修改原始資料</p>
+    </div>
+    <div class="updated" id="updatedAt">載入中...</div>
+  </header>
+
+  <main class="container">
+    <section class="stats-grid">
+      <div class="card stat-card"><div class="label">總 Tokens</div><div class="value" id="grandTotal">-</div></div>
+      <div class="card stat-card"><div class="label">總 Input</div><div class="value" id="grandInput">-</div></div>
+      <div class="card stat-card"><div class="label">總 Output</div><div class="value" id="grandOutput">-</div></div>
+      <div class="card stat-card"><div class="label">Models</div><div class="value" id="uniqueModels">-</div></div>
+      <div class="card stat-card"><div class="label">Providers</div><div class="value" id="uniqueProviders">-</div></div>
+      <div class="card stat-card"><div class="label">Sessions</div><div class="value" id="totalSessions">-</div></div>
+      <div class="card stat-card"><div class="label">Messages</div><div class="value" id="totalMessages">-</div></div>
+      <div class="card stat-card"><div class="label">活躍天數</div><div class="value" id="activeDays">-</div></div>
+    </section>
+
+    <section class="card section-card">
+      <div class="section-head">
+        <h2>時間統計</h2>
+        <div class="tab-row">
+          <button class="tab active" data-range="daily">每日</button>
+          <button class="tab" data-range="weekly">每週</button>
+          <button class="tab" data-range="monthly">每月</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>期間</th>
+              <th>總 Tokens</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>訊息數</th>
+            </tr>
+          </thead>
+          <tbody id="periodTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card section-card">
+      <div class="section-head stack-mobile">
+        <h2>模組明細（自適應）</h2>
+        <input id="modelSearch" class="search" placeholder="搜尋 provider/model..." />
+      </div>
+      <div class="table-wrap tall">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Provider / Model</th>
+              <th>總 Tokens</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>次數</th>
+            </tr>
+          </thead>
+          <tbody id="modelsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card section-card">
+      <h2>Provider 總覽</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>總 Tokens</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>次數</th>
+            </tr>
+          </thead>
+          <tbody id="providersTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card section-card">
+      <div class="section-head stack-mobile">
+        <h2>期間 × 模組明細</h2>
+        <input id="periodModelSearch" class="search" placeholder="搜尋期間或 provider/model..." />
+      </div>
+      <div class="table-wrap tall">
+        <table>
+          <thead>
+            <tr>
+              <th>期間</th>
+              <th>Provider / Model</th>
+              <th>總 Tokens</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>次數</th>
+            </tr>
+          </thead>
+          <tbody id="periodModelTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">GH Pages 靜態頁面 · 未寫死模型清單，新模型會自動出現</footer>
+  <script src="./js/app.js"></script>
+</body>
+</html>

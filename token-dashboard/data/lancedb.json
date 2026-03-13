@@ -1,0 +1,22 @@
+{
+  "updated": "2026-03-11T16:01:03Z",
+  "database": {
+    "path": "~/.openclaw/memory/lancedb-pro/",
+    "size": "1.8M",
+    "totalMemoryUsage": "65MB",
+    "embeddingModel": "gemini-embedding-001",
+    "embeddingDimensions": 3072,
+    "rerank": "none"
+  },
+  "records": {
+    "totalFiles": 11,
+    "categories": [
+      {"name": "fact", "count": 105},
+      {"name": "decision", "count": 48},
+      {"name": "preference", "count": 18}
+    ]
+  },
+  "recentActivity": [
+    {"time": "2026-03-12 00:01", "action": "store", "category": "fact"}
+  ]
+}
