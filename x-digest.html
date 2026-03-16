@@ -1,55 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X Daily Digest - 2026-03-05</title>
+    <title>X 每日推文精選 - 總覽</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #15202b; color: #fff; }
-        h1 { color: #1d9bf0; border-bottom: 1px solid #38444d; padding-bottom: 10px; }
-        h2 { color: #1d9bf0; margin-top: 30px; }
-        .tweet { background: #192734; border-radius: 12px; padding: 15px; margin: 15px 0; }
-        .handle { color: #8b98a5; }
-        .stats { color: #8b98a5; font-size: 14px; margin-top: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            color: #e7e9ea;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            padding: 40px 0;
+            border-bottom: 1px solid #2f3336;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #71767b;
+            font-size: 16px;
+        }
+        .nav-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1d9bf0;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .nav-back:hover {
+            background: #1a8cd8;
+        }
+        .date-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .date-item {
+            display: block;
+            background: #16181c;
+            padding: 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #e7e9ea;
+            transition: all 0.2s;
+        }
+        .date-item:hover {
+            background: #1d9bf0;
+            transform: translateY(-2px);
+        }
+        .date-item .date {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .date-item .count {
+            color: #71767b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .date-item:hover .count {
+            color: #fff;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #71767b;
+            font-size: 14px;
+            border-top: 1px solid #2f3336;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
-    <h1>🐦 X Daily Digest - 2026-03-05</h1>
-    
-    <h2>🔥 熱門推文</h2>
-    
-    <div class="tweet">
-        <strong>@joshesye</strong> <span class="handle">OpenClaw 養成記</span>
-        <p>本來想寫一篇 openclow 文章，看神佬發的這篇感覺可以不寫了，太完整了</p>
-        <p>引用 @berryxia: 「OpenClaw養成記，從0開始！安裝後必看！（40天實戰經驗+含角色提示詞）」</p>
-        <div class="stats">👁 14.3萬 | 🔄 轉發 145 | ❤️ 喜歡 546 | 🔖 書籤 824</div>
+    <a href="index.html" class="nav-back">← 返回首頁</a>
+    <div class="header">
+        <h1>🐦 X 每日推文精選</h1>
+        <p>每日自動爬取 · 智能分類整理</p>
     </div>
-    
-    <div class="tweet">
-        <strong>@zohanlin</strong> <span class="handle">Token Dashboard 省 49% 成本</span>
-        <p>這個 Prompt 讓我的 OpenClaw 省了 49% 的運算成本</p>
-        <p>每次 session boot cost: 13,190 → 6,673 tokens</p>
-        <div class="stats">👁 4,681 | 🔄 轉發 4 | ❤️ 喜歡 40 | 🔖 書籤 39</div>
+    <div class="date-list">
+        <a href="2026-03-16.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 16 日</div>
+            <div class="count">125 則推文</div>
+        </a>
+        <a href="2026-03-15.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 15 日</div>
+            <div class="count">118 則推文</div>
+        </a>
+        <a href="2026-03-14.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 14 日</div>
+            <div class="count">98 則推文</div>
+        </a>
+        <a href="2026-03-13.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 13 日</div>
+            <div class="count">218 則推文</div>
+        </a>
+        <a href="2026-03-12.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 12 日</div>
+            <div class="count">152 則推文</div>
+        </a>
+        <a href="2026-03-11.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 11 日</div>
+            <div class="count">66 則推文</div>
+        </a>
+        <a href="2026-03-10.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 10 日</div>
+            <div class="count">28 則推文</div>
+        </a>
+        <a href="2026-03-09.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 09 日</div>
+            <div class="count">89 則推文</div>
+        </a>
+        <a href="2026-03-08.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 08 日</div>
+            <div class="count">24 則推文</div>
+        </a>
+        <a href="2026-03-07.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 07 日</div>
+            <div class="count">101 則推文</div>
+        </a>
+        <a href="2026-03-06.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 06 日</div>
+            <div class="count">78 則推文</div>
+        </a>
+        <a href="2026-03-04.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 04 日</div>
+            <div class="count">76 則推文</div>
+        </a>
+        <a href="2026-03-03.html" class="date-item">
+            <div class="date">📅 2026 年 03 月 03 日</div>
+            <div class="count">80 則推文</div>
+        </a>
+        <a href="2026-02-28.html" class="date-item">
+            <div class="date">📅 2026 年 02 月 28 日</div>
+            <div class="count">10 則推文</div>
+        </a>
+        <a href="2026-02-27.html" class="date-item">
+            <div class="date">📅 2026 年 02 月 27 日</div>
+            <div class="count">67 則推文</div>
+        </a>
+        <a href="2026-02-26.html" class="date-item">
+            <div class="date">📅 2026 年 02 月 26 日</div>
+            <div class="count">78 則推文</div>
+        </a>
+        <a href="2026-02-25.html" class="date-item">
+            <div class="date">📅 2026 年 02 月 25 日</div>
+            <div class="count">1 則推文</div>
+        </a>
+        <a href="2026-02-24.html" class="date-item">
+            <div class="date">📅 2026 年 02 月 24 日</div>
+            <div class="count">71 則推文</div>
+        </a>
     </div>
-    
-    <div class="tweet">
-        <strong>@zohanlin</strong> <span class="handle">Binance x OpenClaw 直播預告</span>
-        <p>很開心收到 @binancezh 的邀約，明天晚上八點分享這一個月用 OpenClaw 做了什麼 🦞</p>
+    <div class="footer">
+        <p>每日 08:00 自動更新</p>
+        <p>🔗 <a href="index.html" style="color: #1d9bf0;">返回首頁</a></p>
     </div>
-    
-    <div class="tweet">
-        <strong>@roger73005305</strong> <span class="handle">BTC 主力分析</span>
-        <p>#BTC 半夜漲到 74K，爆倉金額不到 6 億<br>#valuescan 監控累積資金已有 28 億</p>
-        <div class="stats">👁 1.1萬 | 🔄 轉發 11 | ❤️ 喜歡 43</div>
-    </div>
-    
-    <div class="tweet">
-        <strong>@DesheShai</strong> <span class="handle">Kaspa 穩定幣費用爭議</span>
-        <p>KEF 又用 Kurve 搶用戶的 Kaspa... $10 固定費用太扯</p>
-        <div class="stats">👁 9,970 | 🔄 轉發 17 | ❤️ 喜歡 124</div>
-    </div>
-    
-    <hr style="border-color: #38444d;">
-    <p style="color: #8b98a5;">Generated by OpenClaw</p>
 </body>
 </html>
