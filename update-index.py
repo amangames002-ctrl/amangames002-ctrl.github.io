@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-REPO_DIR = Path("/tmp/amangames002-ctrl.github.io")
+REPO_DIR = Path("/tmp/x-digest")
 OUTPUT_FILE = REPO_DIR / "x-digest.html"
 
 def get_all_dates():
